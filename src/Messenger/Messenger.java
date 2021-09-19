@@ -2,18 +2,13 @@ package Messenger;
 
 import WorkWithConsole.ConsoleWorker;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Arrays;
-import Main.Main;
 
 public class Messenger {
 
@@ -34,25 +29,19 @@ public class Messenger {
             e.printStackTrace();
             return false;
         }
-//        try {
             sendMessage(socketChannel, bytes);
-//        } catch (Exception e) {
-//            consoleWorker.write("Проблема с отправеой сообщения серверу!");
-//            return false;
-//        }
 
         return true;
     }
 
     public Response getResponse() throws IOException{
         byte[] result = new byte[0];
-//        try {
             while (true) {
                 ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[1000]);
                 int size = socketChannel.read(byteBuffer);
 
                 byte[] bytes = Arrays.copyOf(byteBuffer.array(), size);
-                result = concat(result, bytes);
+                result = concatArrays(result, bytes);
                 try {
                     Response response = (Response) Serializer.deSerializer(result);
                     break;
@@ -66,14 +55,10 @@ public class Messenger {
                 consoleWorker.write("Проблемма с десеиализацией объекта!");
                 e.printStackTrace();
             }
-
-//        } catch (Exception e) {
-//            consoleWorker.write("Проблема с получением ответа от сервера!");
-//        }
         return new Response("Возникла ошибка!");
     }
 
-    private static byte[] concat(byte[] first, byte[] second) {
+    private static byte[] concatArrays(byte[] first, byte[] second) {
         byte[] result = new byte[first.length + second.length];
         int i = 0;
         for (i = 0; i < first.length; i++) {
@@ -92,6 +77,7 @@ public class Messenger {
             ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.bind(socket.getLocalSocketAddress());
             socketChannel = serverSocketChannel.accept();
+            socketChannel.configureBlocking(false);
         }
 
         public void sendMessage (SocketChannel socketChannel,byte[] bytes) throws IOException {

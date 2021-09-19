@@ -1,5 +1,3 @@
-package Main;
-
 import Execute.CommandManager;
 import Messenger.*;
 import WorkWithConsole.ConsoleWorker;

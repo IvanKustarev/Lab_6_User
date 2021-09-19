@@ -8,7 +8,8 @@ public class CitiesCreator {
 
     private static Scan scan;
 
-    public static City createCity(Scan consoleWorker){
+    public static City createCity(Scan newScan){
+        scan = newScan;
         String name = createName();
         Coordinates coordinates = createCoordinates();
         Date creationDate = createCreationDate();

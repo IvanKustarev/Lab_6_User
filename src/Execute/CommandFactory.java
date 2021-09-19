@@ -5,14 +5,14 @@ import CitiesClasses.City;
 import Commands.*;
 import Commands.Settings.Command;
 import Commands.Settings.CommandName;
-import WorkWithConsole.ConsoleWorker;
+import WorkWithConsole.Scan;
 
 public class CommandFactory {
 
-    private ConsoleWorker consoleWorker;
+    private Scan scan;
 
-    public CommandFactory(ConsoleWorker consoleWorker) {
-        this.consoleWorker = consoleWorker;
+    public CommandFactory(Scan scan) {
+        this.scan = scan;
     }
 
     public Command createCommand(CommandString commandString){
@@ -54,6 +54,6 @@ public class CommandFactory {
     }
 
     private City createCity(){
-        return CitiesCreator.createCity(consoleWorker);
+        return CitiesCreator.createCity(scan);
     }
 }

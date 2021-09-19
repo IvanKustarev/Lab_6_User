@@ -27,7 +27,6 @@ public class ConnectionManager {
             messenger.connect(InetAddress.getLocalHost().getHostName(), port);
         } catch (Exception e) {
             consoleWorker.write("Не удалось подключиться к серверу!");
-            e.printStackTrace();
             return false;
         }
         return true;

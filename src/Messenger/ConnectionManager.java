@@ -15,7 +15,7 @@ public class ConnectionManager {
     }
 
     public boolean connectToServer(){
-        consoleWorker.write("Введите порт:");
+        consoleWorker.write("Введите порт сервера:");
         int port;
         try {
             port = Integer.valueOf(consoleWorker.read().trim());

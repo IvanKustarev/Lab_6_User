@@ -41,15 +41,19 @@ public class CitiesCreator {
         scan.write("Введите координату города по X");
         try {
             x = Integer.valueOf(scan.read());
+            if(x > 96){
+                scan.write("Координата X не может быть больше 96!");
+                return createCoordinates();
+            }
         }catch (Exception e){
-            scan.write("Координата X должна быть целым числом");
+            scan.write("Координата X должна быть целым числом!");
             return createCoordinates();
         }
         scan.write("Введите координату города по Y");
         try {
             y = Float.valueOf(scan.read());
         }catch (Exception e){
-            scan.write("Координата Y должна быть целым или дробным числом");
+            scan.write("Координата Y должна быть целым или дробным числом!");
             return createCoordinates();
         }
         Coordinates coordinates = new Coordinates(x, y);
@@ -65,6 +69,10 @@ public class CitiesCreator {
         int area;
         try {
             area = Integer.valueOf(scan.read());
+            if(area <= 0 ){
+                scan.write("Число должно быть больше нуля!");
+                return createAreas();
+            }
         }catch (Exception e){
             scan.write("Область должна быть задана целым числом!");
             return createAreas();
@@ -77,6 +85,10 @@ public class CitiesCreator {
         int population;
         try {
             population = Integer.valueOf(scan.read());
+            if(population <= 0 ){
+                scan.write("Число должно быть больше нуля!");
+                return createPopulation();
+            }
         }catch (Exception e){
             scan.write("Население должно быть задано целым числом!");
             return createPopulation();

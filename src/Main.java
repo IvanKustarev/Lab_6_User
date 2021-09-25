@@ -6,16 +6,17 @@ import java.io.IOException;
 
 public class Main {
     private static ConnectionManager connectionManager;
+    private static ConsoleWorker consoleWorker;
+    private static CommandManager commandManager;
 
     public static void main(String[] args) {
 
-        ConsoleWorker consoleWorker = new ConsoleWorker();
+        consoleWorker = new ConsoleWorker();
         Messenger messenger = new Messenger(consoleWorker);
         connectionManager = new ConnectionManager(messenger, consoleWorker);
+        commandManager = new CommandManager(consoleWorker, messenger);
+
         connectToServer();
-
-        CommandManager commandManager = new CommandManager(consoleWorker, messenger);
-
         boolean exit = false;
         while (!exit) {
             try {
@@ -29,7 +30,15 @@ public class Main {
 
     public static void connectToServer() {
         if (connectionManager.connectToServer()) {
-            return;
+            try {
+                boolean login = false;
+                while (!login){
+                    login = commandManager.login();
+                }
+
+            } catch (IOException e) {
+                connectToServer();
+            }
         } else {
             connectToServer();
         }

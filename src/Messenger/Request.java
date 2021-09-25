@@ -1,5 +1,6 @@
 package Messenger;
 
+import CitiesClasses.User;
 import Commands.Settings.Command;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ public class Request implements Serializable {
     public Request(Command command, boolean isCommandRequest) {
         this.command = command;
         this.isCommandRequest = isCommandRequest;
+
     }
 
     public Socket getSocket() {

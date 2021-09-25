@@ -1,5 +1,6 @@
 package Execute;
 
+import CitiesClasses.User;
 import Commands.Settings.Command;
 import Commands.Settings.CommandName;
 import Messenger.*;
@@ -21,7 +22,7 @@ public class CommandExecutor {
         this.commandManager = commandManager;
     }
 
-    public Response executeCommand(Command command, Scan scan) throws IOException {
+    public Response executeCommand(Command command, User user) throws IOException {
         if (messenger.sendRequest(new Request(command, true))) {
             Response response = messenger.getResponse();
             return response;

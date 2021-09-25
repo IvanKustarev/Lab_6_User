@@ -8,7 +8,7 @@ public class CitiesCreator {
 
     private static Scan scan;
 
-    public static City createCity(Scan newScan){
+    public static City createCity(Scan newScan, User user){
         scan = newScan;
         String name = createName();
         Coordinates coordinates = createCoordinates();
@@ -21,7 +21,7 @@ public class CitiesCreator {
         Government government = createGovernment();
         Human governor = createGovernor();
 
-        City city = new City(name, coordinates, creationDate, areas, population, metersAboveSeaLevel, establishmentDate, climate, government, governor);
+        City city = new City(name, coordinates, creationDate, areas, population, metersAboveSeaLevel, establishmentDate, climate, government, governor, user.getName());
         return city;
     }
 

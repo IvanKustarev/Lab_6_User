@@ -58,13 +58,14 @@ public class CommandManager {
             String name = consoleWorker.read();
             consoleWorker.write("Введите пароль:");
             String password = consoleWorker.read();
-            Response response = commandExecutor.executeCommand(new Login(new User(name, password)), null);
-            if (response.getMessage().contains("false")) {
-                consoleWorker.write("Проблемы со входом!");
+            User user = new User(name, password);
+            Response response = commandExecutor.executeCommand(new Login(user), null);
+            if (!response.isSuccess()) {
+                consoleWorker.write(response.getMessage());
                 return false;
             } else {
                 this.user = user;
-                consoleWorker.write("Добро пожаловать " + user.getName());
+                consoleWorker.write(response.getMessage());
                 return true;
             }
         } else if (code == 1) {
@@ -72,13 +73,14 @@ public class CommandManager {
             String name = consoleWorker.read();
             consoleWorker.write("Введите новый пароль:");
             String password = consoleWorker.read();
-            Response response = commandExecutor.executeCommand(new Register(new User(name, password)), null);
-            if(response.getMessage().contains("false")){
-                consoleWorker.write("Проблемы с регистрацией! Попробуйте другое имя пользователя!");
+            User user = new User(name, password);
+            Response response = commandExecutor.executeCommand(new Register(user), null);
+            if(!response.isSuccess()){
+                consoleWorker.write(response.getMessage());
                 return false;
             }else {
                 this.user = user;
-                consoleWorker.write("Пользователь " + user.getName() + " зарегестрирован");
+                consoleWorker.write(response.getMessage());
                 return true;
             }
         } else {

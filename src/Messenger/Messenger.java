@@ -55,7 +55,7 @@ public class Messenger {
                 consoleWorker.write("Проблемма с десеиализацией объекта!");
                 e.printStackTrace();
             }
-        return new Response("Возникла ошибка!");
+        return new Response("Возникла ошибка!", false);
     }
 
     private static byte[] concatArrays(byte[] first, byte[] second) {
